@@ -17,5 +17,5 @@ var userSchema = mongoose.Schema({
   lastName:   String
 });
 
-//importando a model, veja no arquivo user.js como a importo usando o require
+//exportando a model, veja no arquivo user.js como a importo usando o require
 module.exports = mongoose.model('user', userSchema);
