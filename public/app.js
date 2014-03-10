@@ -11,5 +11,5 @@ var testApp = angular.module('testApp', [
     $routeProvider.when('/edit-user/:id', {templateUrl: './views/user/edit_user.html', controller: 'UserDetailCtrl'});
     $routeProvider.when('/create-user', {templateUrl: './views/user/create_user.html', controller: 'UserCreateCtrl'});
     $routeProvider.when('/login', {templateUrl: './views/login/login.html', controller: 'LoginCtrl'});
-    $routeProvider.otherwise({redirectTo: '/'});
+    $routeProvider.otherwise({redirectTo: '/list-user'});
   }]);

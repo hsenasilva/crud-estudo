@@ -71,6 +71,17 @@ app.put('/api/user/:id', user.put);
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successReturnToOrRedirect: '/#/list-user', failureRedirect: '/login' }));
 
+//login oauth facebook
+app.get("/auth/facebook", passport.authenticate("facebook",{ scope : "email"}));
+app.get("/auth/facebook/callback", passport.authenticate('facebook', {successReturnToOrRedirect: '/#/list-user', failureRedirect: '/login' }));
+
+// app.get("/auth/facebook/callback",
+//   passport.authenticate("facebook",{ failureRedirect: '/login'}),
+//   function(req,res){
+//     res.render("loggedin", {user : req.user});
+//   }
+// );
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
