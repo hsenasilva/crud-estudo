@@ -36,27 +36,13 @@ module.exports = function (passport) {
 	  callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
 		}, 
 	  function(token, tokenSecret, profile, done) {
+	  	//TODO
 	    // NOTA: Voce tera, provavelmente, que associar o usuario do Twitter
 	    //       com um registro do usuario no banco de dados da aplicacao.
 	    var user = profile;
 	    return done(null, user);
-	  });
+	  })
 	);
-
-	passport.use(new LocalStrategy(function(username, password, done){
-    User.localUserSchema.findOne({ username : username}, function(err,user){
-        if(err) { return done(err); }
-        if(!user){
-            return done(null, false, { message: 'Username Incorreto.' });
-        }
-
-        hash( password, user.salt, function (err, hash) {
-            if (err) { return done(err); }
-            if (hash == user.hash) return done(null, user);
-            done(null, false, { message: 'Password Incorreto.' });
-        });
-    });
-	}));
 
 	passport.use(new FacebookStrategy({
     clientID: "577893435640029",
@@ -85,7 +71,6 @@ module.exports = function (passport) {
     done(null, user.id);
 	});
 
-
 	passport.deserializeUser(function(id, done) {
     User.facebookUserSchema.findById(id,function(err,user){
       if(err) done(err);
@@ -99,18 +84,5 @@ module.exports = function (passport) {
       }
     });
 	});
-
-	// function userExist(req, res, next) {
- //    User.localUserSchema.count({
- //        username: req.body.username
- //    }, function (err, count) {
- //        if (count === 0) {
- //            next();
- //        } else {
- //            // req.session.error = "User Exist"
- //            res.redirect("/singup");
- //        }
- //    });
-	// }
 
 }

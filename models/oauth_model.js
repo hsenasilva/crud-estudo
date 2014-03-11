@@ -4,12 +4,7 @@ var mongoose        = require('mongoose')
   , db              = mongoose.connection
   , connection      = require('../app.js');
 
-
-var LocalUserSchema = new mongoose.Schema({
-  username: String,
-  salt: String,
-  hash: String
-});
+//TODO criar model twitter
 
 var FacebookUserSchema = new mongoose.Schema({
   fbId: String,
@@ -17,5 +12,4 @@ var FacebookUserSchema = new mongoose.Schema({
   name : String
 });
 
-exports.localUserSchema     = mongoose.model('userauths', LocalUserSchema);
 exports.facebookUserSchema  = mongoose.model('fbs', FacebookUserSchema);
